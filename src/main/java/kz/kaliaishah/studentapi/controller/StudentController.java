@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/students")
@@ -44,6 +45,12 @@ public class StudentController {
     public Student getById(@PathVariable Long id) {
         return repository.findById(id).orElseThrow(() -> new StudentNotFoundException(id));
     }
+    // READ — search by last name (improvement by Kali Aishah)
+    @GetMapping("/search")
+    public List<Student> searchByLastName(@RequestParam String lastName) {
+        return repository.findByLastNameContainingIgnoreCase(lastName);
+    }
+
 
     // UPDATE
     @PutMapping("/{id}")
