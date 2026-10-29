@@ -9,7 +9,7 @@ pipeline {
         STUDENT_NAME = 'Kali Aishah'
         STUDENT_ID   = '37830'
         IMAGE_NAME   = 'kali-aishah-student-api'
-        IMAGE_TAG    = 'v1.0-kali-aishah-37830'
+        IMAGE_TAG    = 'v1.1-kali-aishah-37830'
     }
 
     options {
