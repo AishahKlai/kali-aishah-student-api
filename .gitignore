@@ -1,0 +1,26 @@
+# Gradle / build output
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+out/
+
+# Secrets — never commit!
+.env
+*.pem
+*.key
+
+# Logs and backups generated locally
+logs/*
+!logs/.gitkeep
+backups/*
+!backups/.gitkeep
+*_log_analysis.txt
+
+# OS files
+.DS_Store
+Thumbs.db

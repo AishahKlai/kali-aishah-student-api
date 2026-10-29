@@ -1,0 +1,49 @@
+name: kali-aishah-student-api
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: kali-aishah-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - kali-aishah-pgdata:/var/lib/postgresql/data
+    networks:
+      - kali-aishah-net
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: unless-stopped
+
+  app:
+    build: .
+    image: kali-aishah-student-api:${APP_TAG:-v1.0-kali-aishah-37830}
+    container_name: kali-aishah-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "8080:8080"
+    networks:
+      - kali-aishah-net
+    restart: unless-stopped
+
+volumes:
+  kali-aishah-pgdata:
+    name: kali-aishah-pgdata
+
+networks:
+  kali-aishah-net:
+    name: kali-aishah-net
+
