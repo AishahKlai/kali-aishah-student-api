@@ -2,7 +2,7 @@
 Spring Boot CRUD application for managing students.
 DevOps midterm project of Kali Aishah (student ID 37830).
 
-Status: project created by Kali Aishah
+Status: documentation updated by Kali Aishah
 
 ## Changes by Kali Aishah
 - Added endpoint GET /api/students/search?lastName=... (search students by last name, case-insensitive)
